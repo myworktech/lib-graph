@@ -1,6 +1,9 @@
-package com.myworktech;
+package com.myworktech.directed;
 
 
+import com.myworktech.DefaultDirectedGraph;
+import com.myworktech.edge.DefaultEdge;
+import com.myworktech.DefaultPath;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,6 +42,18 @@ public class DefaultDirectedGraphPathsTest {
     }
 
     @Test
+    public void noEdgesExist3() {
+        DefaultDirectedGraph<Object> graph = new DefaultDirectedGraph<>();
+        Object vertex1 = new Object();
+        Object vertex2 = new Object();
+        graph.addVertex(vertex1);
+        graph.addVertex(vertex2);
+
+        Set<DefaultPath<Object>> paths = graph.getPath(vertex1, vertex2);
+        Assert.assertEquals(0, paths.size());
+    }
+
+    @Test
     public void noEdgesExist2() {
         DefaultDirectedGraph<Object> graph = new DefaultDirectedGraph<>();
         Object vertex1 = new Object();
@@ -55,20 +70,6 @@ public class DefaultDirectedGraphPathsTest {
 
 
         Set<DefaultPath<Object>> paths = graph.getPath(vertex1, vertex4);
-        Assert.assertEquals(0, paths.size());
-    }
-
-    @Test
-    public void noPathExists() {
-        DefaultDirectedGraph<Object> graph = new DefaultDirectedGraph<>();
-        Object vertex1 = new Object();
-        Object vertex2 = new Object();
-        graph.addVertex(vertex1);
-        graph.addVertex(vertex2);
-
-        graph.addEdge(vertex1, vertex2);
-
-        Set<DefaultPath<Object>> paths = graph.getPath(vertex2, vertex1);
         Assert.assertEquals(0, paths.size());
     }
 

@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DefaultDirectedGraph<V> implements Graph<V> {
+public class DefaultUndirectedGraph<V> implements Graph<V> {
 
     public Map<V, Set<DefaultEdge<V>>> b = new HashMap<>();
 
@@ -36,9 +36,8 @@ public class DefaultDirectedGraph<V> implements Graph<V> {
         assertVertexExists(destination);
         checkCycles(source, destination);
 
-        DefaultEdge<V> edge = new DefaultEdge<>(source, destination);
-
-        b.get(source).add(edge);
+        b.get(source).add(new DefaultEdge<>(source, destination));
+        b.get(destination).add(new DefaultEdge<>(destination, source));
     }
 
     private void checkCycles(V source, V destination) {
@@ -50,7 +49,7 @@ public class DefaultDirectedGraph<V> implements Graph<V> {
     public Set<DefaultPath<V>> getPath(V source, V destination) {
         assertVertexExists(source);
         assertVertexExists(destination);
-        return new DefaultDirectedPathsFinder<>(this).findAllPaths(source, destination);
+        return new DefaultUndirectedPathsFinder<>(this).findAllPaths(source, destination);
     }
 
     public Set<DefaultEdge<V>> getEdges(V vertex) {

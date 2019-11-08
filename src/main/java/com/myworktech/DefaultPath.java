@@ -1,5 +1,7 @@
 package com.myworktech;
 
+import com.myworktech.edge.DefaultEdge;
+
 import java.util.*;
 
 public class DefaultPath<V> {

@@ -1,15 +1,21 @@
-package com.myworktech;
+package com.myworktech.edge;
 
 import java.util.Objects;
 
-public class DefaultEdge<V> {
+public class WeightedEdge<V> {
 
     private final V source;
     private final V destination;
+    private final int weight;
 
-    public DefaultEdge(V source, V destination) {
+    public WeightedEdge(V source, V destination, int weight) {
         this.source = source;
         this.destination = destination;
+        this.weight = weight;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 
     public V getSource() {
@@ -22,9 +28,10 @@ public class DefaultEdge<V> {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Edge{");
+        final StringBuilder sb = new StringBuilder("WeightedEdge{");
         sb.append("source=").append(source);
         sb.append(", destination=").append(destination);
+        sb.append(", weight=").append(weight);
         sb.append('}');
         return sb.toString();
     }
@@ -33,13 +40,14 @@ public class DefaultEdge<V> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DefaultEdge<?> edge = (DefaultEdge<?>) o;
-        return Objects.equals(source, edge.source) &&
-                Objects.equals(destination, edge.destination);
+        WeightedEdge<?> that = (WeightedEdge<?>) o;
+        return weight == that.weight &&
+                Objects.equals(source, that.source) &&
+                Objects.equals(destination, that.destination);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(source, destination);
+        return Objects.hash(source, destination, weight);
     }
 }

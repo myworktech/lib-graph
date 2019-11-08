@@ -5,12 +5,12 @@ import com.myworktech.edge.DefaultEdge;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DefaultDirectedPathsFinder<V> {
+public class DefaultUndirectedPathsFinder<V> {
 
-    private final DefaultDirectedGraph<V> defaultDirectedGraph;
+    private final DefaultUndirectedGraph<V> defaultUndirectedGraph;
 
-    public DefaultDirectedPathsFinder(DefaultDirectedGraph<V> defaultDirectedGraph) {
-        this.defaultDirectedGraph = defaultDirectedGraph;
+    public DefaultUndirectedPathsFinder(DefaultUndirectedGraph<V> defaultUndirectedGraph) {
+        this.defaultUndirectedGraph = defaultUndirectedGraph;
     }
 
     public Set<DefaultPath<V>> findAllPaths(V source, V destination) {
@@ -29,7 +29,7 @@ public class DefaultDirectedPathsFinder<V> {
         }
 
         Set<DefaultPath<V>> allPaths = new HashSet<>();
-        for (V neighbour : defaultDirectedGraph.getNeighbours(source)) {
+        for (V neighbour : defaultUndirectedGraph.getNeighbours(source)) {
             if (!seen.contains(neighbour)) {
                 Set<DefaultPath<V>> results = findRecursive(new HashSet<>(seen), neighbour, destination);
 

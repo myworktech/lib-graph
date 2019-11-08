@@ -1,6 +1,7 @@
-package com.myworktech;
+package com.myworktech.directed;
 
 
+import com.myworktech.DefaultDirectedGraph;
 import org.junit.Assert;
 import org.junit.Test;
 
