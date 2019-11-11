@@ -32,7 +32,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
     public void addEdge(V source, V destination) {
         assertVertexExists(source);
         assertVertexExists(destination);
-        checkCycles(source, destination);
+        checkSelfLoop(source, destination);
 
         edgeProvider.addEdge(source, destination);
     }
@@ -51,7 +51,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
         return edgeProvider.getNeighbours(vertex);
     }
 
-    private void checkCycles(V vertex1, V vertex2) {
+    private void checkSelfLoop(V vertex1, V vertex2) {
         if (Objects.equals(vertex1, vertex2))
             throw new IllegalArgumentException("Cycles not allowed!");
     }
