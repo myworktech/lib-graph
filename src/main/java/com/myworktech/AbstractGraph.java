@@ -1,39 +1,31 @@
 package com.myworktech;
 
-import com.myworktech.edge.DefaultDirectedEdge;
-import com.myworktech.edge.Edge;
-import com.myworktech.edge.Pair;
 import com.myworktech.edgeProvider.EdgeFactory;
 import com.myworktech.edgeProvider.EdgeProvider;
+import com.myworktech.pathFinder.DefaultPath;
 import com.myworktech.type.GraphType;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public abstract class AbstractGraph<V> implements Graph<V> {
 
-
     private final EdgeProvider<V> edgeProvider;
     private final GraphType graphType;
-    private Map<V, Set<Edge<V>>> b;
 
     public AbstractGraph(GraphType graphType) {
         this.graphType = graphType;
-        this.b = new HashMap<>();
-        this.edgeProvider = EdgeFactory.getProvider(graphType, b);
+        this.edgeProvider = EdgeFactory.getProvider(graphType);
     }
 
     @Override
     public boolean containsVertex(V vertex) {
-        return b.containsKey(vertex);
+        return edgeProvider.containsVertex(vertex);
     }
 
     @Override
     public void addVertex(V vertex) {
-        b.putIfAbsent(vertex, new HashSet<>());
+        edgeProvider.addVertex(vertex);
     }
 
     @Override
@@ -47,31 +39,15 @@ public abstract class AbstractGraph<V> implements Graph<V> {
 
     @Override
     public boolean hasEdge(V vertex1, V vertex2) {
-
-        Set<Edge<V>> edges = b.get(vertex1);
-        for (Edge<V> edge : edges) {
-            Pair<V, V> v = edge.getVertexes();
-                return v.hasElements(vertex1, vertex2);
-        }
-        return false;
-
+        return edgeProvider.hasEdge(vertex1, vertex2);
     }
 
     public Set<V> getNeighbours(V vertex) {
-        return b.get(vertex)
-                .stream()
-                .map(e -> {
-                    Pair<V, V> v = e.getVertexes();
-                    if (v.getFirst() != vertex)
-                        return v.getFirst();
-                    else
-                        return v.getSecond();
-                })
-                .collect(Collectors.toSet());
+        return edgeProvider.getNeighbours(vertex);
     }
 
     private void checkCycles(V vertex1, V vertex2) {
-        if (vertex1 == vertex2)
+        if (Objects.equals(vertex1, vertex2))
             throw new IllegalArgumentException("Cycles not allowed!");
     }
 

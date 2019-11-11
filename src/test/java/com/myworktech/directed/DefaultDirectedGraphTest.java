@@ -80,7 +80,7 @@ public class DefaultDirectedGraphTest {
     }
 
     @Test
-    public void checkContainsNotAddedEdge_DirectedGraph() {
+    public void checkDirectedEdge() {
         DefaultDirectedGraph<Object> graph = new DefaultDirectedGraph<>();
         Object vertex1 = new Object();
         Object vertex2 = new Object();
@@ -90,6 +90,7 @@ public class DefaultDirectedGraphTest {
         graph.addEdge(vertex1, vertex2);
 
         Assert.assertFalse(graph.hasEdge(vertex2, vertex1));
+        Assert.assertTrue(graph.hasEdge(vertex1, vertex2));
     }
 
 

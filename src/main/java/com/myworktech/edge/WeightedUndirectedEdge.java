@@ -5,9 +5,9 @@ import java.util.Set;
 
 public class WeightedUndirectedEdge<V> extends DefaultUndirectedEdge<V> implements Weight {
 
-    private final int weight;
+    private final long weight;
 
-    public WeightedUndirectedEdge(V first, V second, int weight) {
+    public WeightedUndirectedEdge(V first, V second, long weight) {
         super(first, second);
         this.weight = weight;
     }

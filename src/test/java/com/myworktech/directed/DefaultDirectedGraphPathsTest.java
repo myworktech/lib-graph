@@ -3,6 +3,7 @@ package com.myworktech.directed;
 
 import com.myworktech.DefaultDirectedGraph;
 import com.myworktech.edge.DefaultDirectedEdge;
+import com.myworktech.pathFinder.DefaultDirectedPathsFinder;
 import com.myworktech.pathFinder.DefaultPath;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,14 +12,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DefaultDirectedGraphPathsTest {
-/*
+
     @Test(expected = IllegalArgumentException.class)
     public void vertexesNotExist() {
         DefaultDirectedGraph<Object> graph = new DefaultDirectedGraph<>();
         Object vertex1 = new Object();
         Object vertex2 = new Object();
 
-        graph.getPath(vertex1, vertex2);
+        DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
+        finder.findAllPaths(vertex1, vertex2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void vertexesNotExist2() {
+        DefaultDirectedGraph<Object> graph = new DefaultDirectedGraph<>();
+        Object vertex1 = new Object();
+        Object vertex2 = new Object();
+        Object vertex3 = new Object();
+
+        graph.addVertex(vertex3);
+
+        DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
+        finder.findAllPaths(vertex1, vertex2);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -28,7 +43,9 @@ public class DefaultDirectedGraphPathsTest {
         Object vertex2 = new Object();
         graph.addVertex(vertex1);
 
-        graph.getPath(vertex1, vertex2);
+        DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
+
+        finder.findAllPaths(vertex1, vertex2);
     }
 
     @Test
@@ -37,7 +54,9 @@ public class DefaultDirectedGraphPathsTest {
         Object vertex1 = new Object();
         graph.addVertex(vertex1);
 
-        Set<DefaultPath<Object>> paths = graph.getPath(vertex1, vertex1);
+        DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
+
+        Set<DefaultPath<Object>> paths = finder.findAllPaths(vertex1, vertex1);
         Assert.assertEquals(0, paths.size());
     }
 
@@ -49,7 +68,9 @@ public class DefaultDirectedGraphPathsTest {
         graph.addVertex(vertex1);
         graph.addVertex(vertex2);
 
-        Set<DefaultPath<Object>> paths = graph.getPath(vertex1, vertex2);
+        DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
+
+        Set<DefaultPath<Object>> paths = finder.findAllPaths(vertex1, vertex2);
         Assert.assertEquals(0, paths.size());
     }
 
@@ -68,8 +89,11 @@ public class DefaultDirectedGraphPathsTest {
         graph.addEdge(vertex1, vertex2);
         graph.addEdge(vertex3, vertex4);
 
+        DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
 
-        Set<DefaultPath<Object>> paths = graph.getPath(vertex1, vertex4);
+
+
+        Set<DefaultPath<Object>> paths = finder.findAllPaths(vertex1, vertex4);
         Assert.assertEquals(0, paths.size());
     }
 
@@ -83,6 +107,7 @@ public class DefaultDirectedGraphPathsTest {
 
         graph.addEdge(vertex1, vertex2);
 
+        DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
 
         Set<DefaultPath<Object>> expectedPaths = new HashSet<>();
 
@@ -90,7 +115,7 @@ public class DefaultDirectedGraphPathsTest {
         path1.add(new DefaultDirectedEdge<>(vertex1, vertex2));
         expectedPaths.add(path1);
 
-        Set<DefaultPath<Object>> actualPaths = graph.getPath(vertex1, vertex2);
+        Set<DefaultPath<Object>> actualPaths = finder.findAllPaths(vertex1, vertex2);
 
         Assert.assertEquals(expectedPaths, actualPaths);
     }
@@ -105,7 +130,10 @@ public class DefaultDirectedGraphPathsTest {
 
         graph.addEdge(vertex1, vertex2);
 
-        Set<DefaultPath<Object>> paths = graph.getPath(vertex2, vertex1);
+        DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
+
+
+        Set<DefaultPath<Object>> paths = finder.findAllPaths(vertex2, vertex1);
         Assert.assertTrue(paths.isEmpty());
     }
 
@@ -122,6 +150,8 @@ public class DefaultDirectedGraphPathsTest {
         graph.addEdge(vertex1, vertex2);
         graph.addEdge(vertex2, vertex3);
 
+        DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
+
         Set<DefaultPath<Object>> expectedPaths = new HashSet<>();
 
         DefaultPath<Object> path1 = new DefaultPath<>();
@@ -129,7 +159,7 @@ public class DefaultDirectedGraphPathsTest {
         path1.add(new DefaultDirectedEdge<>(vertex2, vertex3));
         expectedPaths.add(path1);
 
-        Set<DefaultPath<Object>> actualPaths = graph.getPath(vertex1, vertex3);
+        Set<DefaultPath<Object>> actualPaths = finder.findAllPaths(vertex1, vertex3);
 
         Assert.assertEquals(expectedPaths, actualPaths);
     }
@@ -148,6 +178,8 @@ public class DefaultDirectedGraphPathsTest {
         graph.addEdge(vertex2, vertex3);
         graph.addEdge(vertex1, vertex3);
 
+        DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
+
         Set<DefaultPath<Object>> expectedPaths = new HashSet<>();
 
         DefaultPath<Object> path1 = new DefaultPath<>();
@@ -159,7 +191,7 @@ public class DefaultDirectedGraphPathsTest {
         path2.add(new DefaultDirectedEdge<>(vertex1, vertex3));
         expectedPaths.add(path2);
 
-        Set<DefaultPath<Object>> actualPaths = graph.getPath(vertex1, vertex3);
+        Set<DefaultPath<Object>> actualPaths = finder.findAllPaths(vertex1, vertex3);
 
         Assert.assertEquals(expectedPaths, actualPaths);
     }
@@ -192,6 +224,9 @@ public class DefaultDirectedGraphPathsTest {
         graph.addEdge(vertex7, vertex8);
         graph.addEdge(vertex8, vertex5);
 
+        DefaultDirectedPathsFinder<String> finder = new DefaultDirectedPathsFinder<>(graph);
+
+
         Set<DefaultPath<String>> expectedPaths = new HashSet<>();
 
         DefaultPath<String> path1 = new DefaultPath<>();
@@ -206,7 +241,7 @@ public class DefaultDirectedGraphPathsTest {
         path2.add(new DefaultDirectedEdge<>("7", "8"));
         expectedPaths.add(path2);
 
-        Set<DefaultPath<String>> actualPaths = graph.getPath(vertex1, vertex8);
+        Set<DefaultPath<String>> actualPaths = finder.findAllPaths(vertex1, vertex8);
 
         Assert.assertEquals(expectedPaths, actualPaths);
     }
@@ -239,6 +274,8 @@ public class DefaultDirectedGraphPathsTest {
         graph.addEdge(vertex7, vertex8);
         graph.addEdge(vertex8, vertex5);
 
+        DefaultDirectedPathsFinder<String> finder = new DefaultDirectedPathsFinder<>(graph);
+
         Set<DefaultPath<String>> expectedPaths = new HashSet<>();
 
         DefaultPath<String> path1 = new DefaultPath<>();
@@ -255,7 +292,7 @@ public class DefaultDirectedGraphPathsTest {
         path2.add(new DefaultDirectedEdge<>("8", "5"));
         expectedPaths.add(path2);
 
-        Set<DefaultPath<String>> actualPaths = graph.getPath(vertex1, vertex5);
+        Set<DefaultPath<String>> actualPaths = finder.findAllPaths(vertex1, vertex5);
 
         Assert.assertEquals(expectedPaths, actualPaths);
     }
@@ -290,6 +327,8 @@ public class DefaultDirectedGraphPathsTest {
         graph.addEdge(vertex8, vertex5);
         graph.addEdge(vertex3, vertex7);
 
+        DefaultDirectedPathsFinder<String> finder = new DefaultDirectedPathsFinder<>(graph);
+
         Set<DefaultPath<String>> expectedPaths = new HashSet<>();
 
         DefaultPath<String> path1 = new DefaultPath<>();
@@ -319,10 +358,9 @@ public class DefaultDirectedGraphPathsTest {
         path4.add(new DefaultDirectedEdge<>("8", "5"));
         expectedPaths.add(path4);
 
-        Set<DefaultPath<String>> actualPaths = graph.getPath(vertex1, vertex5);
+        Set<DefaultPath<String>> actualPaths = finder.findAllPaths(vertex1, vertex5);
 
         Assert.assertEquals(expectedPaths, actualPaths);
     }
 
- */
 }

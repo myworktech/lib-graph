@@ -80,16 +80,17 @@ public class DefaultUndirectedGraphTest {
     }
 
     @Test
-    public void checkContainsNotAddedEdge_UndirectedGraph() {
+    public void checkUndirectedEdge() {
         DefaultUndirectedGraph<Object> graph = new DefaultUndirectedGraph<>();
-        Object vertex1 = "1";
-        Object vertex2 = "2";
+        Object vertex1 = new Object();
+        Object vertex2 = new Object();
         graph.addVertex(vertex1);
         graph.addVertex(vertex2);
 
         graph.addEdge(vertex1, vertex2);
 
         Assert.assertTrue(graph.hasEdge(vertex2, vertex1));
+        Assert.assertTrue(graph.hasEdge(vertex1, vertex2));
     }
 
 

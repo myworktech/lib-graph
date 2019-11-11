@@ -4,6 +4,7 @@ import com.myworktech.DefaultDirectedGraph;
 import com.myworktech.edge.DefaultDirectedEdge;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class DefaultDirectedPathsFinder<V> {
@@ -15,13 +16,15 @@ public class DefaultDirectedPathsFinder<V> {
     }
 
     public Set<DefaultPath<V>> findAllPaths(V source, V destination) {
+        if (!defaultDirectedGraph.containsVertex(source) || !defaultDirectedGraph.containsVertex(destination))
+            throw new IllegalArgumentException();
         return findRecursive(new HashSet<>(), source, destination);
     }
 
     private Set<DefaultPath<V>> findRecursive(Set<V> seen, V source, V destination) {
         seen.add(source);
 
-        if (source == destination) {
+        if (Objects.equals(source, destination)) {
             if (seen.size() == 1)
                 return new HashSet<>();
             HashSet<DefaultPath<V>> defaultPaths = new HashSet<>();
