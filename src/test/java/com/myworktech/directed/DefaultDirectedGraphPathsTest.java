@@ -92,7 +92,6 @@ public class DefaultDirectedGraphPathsTest {
         DefaultDirectedPathsFinder<Object> finder = new DefaultDirectedPathsFinder<>(graph);
 
 
-
         Set<DefaultPath<Object>> paths = finder.findAllPaths(vertex1, vertex4);
         Assert.assertEquals(0, paths.size());
     }

@@ -1,9 +1,5 @@
 package com.myworktech;
 
-import com.myworktech.pathFinder.DefaultPath;
-
-import java.util.Set;
-
 public interface Graph<V> {
     boolean containsVertex(V vertex);
 

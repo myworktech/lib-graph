@@ -28,17 +28,6 @@ public class DefaultGraphType implements GraphType {
         this.weighted = weighted;
     }
 
-    @Override
-    public boolean isDirected() {
-        return directed;
-    }
-
-    @Override
-    public boolean isWeighted() {
-        return weighted;
-    }
-
-
     public static DefaultGraphType directedAndWeighted() {
         return new Builder()
                 .directed().weighted(true).build();
@@ -59,6 +48,15 @@ public class DefaultGraphType implements GraphType {
                 .undirected().weighted(true).build();
     }
 
+    @Override
+    public boolean isDirected() {
+        return directed;
+    }
+
+    @Override
+    public boolean isWeighted() {
+        return weighted;
+    }
 
     @Override
     public String toString() {

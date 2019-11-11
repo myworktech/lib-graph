@@ -2,7 +2,6 @@ package com.myworktech;
 
 import com.myworktech.edgeProvider.EdgeFactory;
 import com.myworktech.edgeProvider.EdgeProvider;
-import com.myworktech.pathFinder.DefaultPath;
 import com.myworktech.type.GraphType;
 
 import java.util.Objects;

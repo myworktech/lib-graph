@@ -1,8 +1,5 @@
 package com.myworktech.edge;
 
-import java.util.Objects;
-import java.util.Set;
-
 public class WeightedUndirectedEdge<V> extends DefaultUndirectedEdge<V> implements Weight {
 
     private final long weight;

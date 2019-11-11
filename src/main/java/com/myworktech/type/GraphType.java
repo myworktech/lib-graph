@@ -1,7 +1,6 @@
 package com.myworktech.type;
 
-public interface GraphType
-{
+public interface GraphType {
     /**
      * @return true if all edges of the graph are directed
      */
