@@ -2,38 +2,38 @@ package com.myworktech.edge;
 
 import java.util.Objects;
 
-public class DefaultEdge<V> {
+public class DefaultDirectedEdge<V> implements DirectedEdge<V> {
 
     private final V source;
     private final V destination;
 
-    public DefaultEdge(V source, V destination) {
+    public DefaultDirectedEdge(V source, V destination) {
         this.source = source;
         this.destination = destination;
     }
 
+    @Override
     public V getSource() {
         return source;
     }
 
+    @Override
     public V getDestination() {
         return destination;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Edge{");
-        sb.append("source=").append(source);
-        sb.append(", destination=").append(destination);
-        sb.append('}');
-        return sb.toString();
+        return "DefaultDirectedEdge{" + "source=" + source +
+                ", destination=" + destination +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DefaultEdge<?> edge = (DefaultEdge<?>) o;
+        DefaultDirectedEdge<?> edge = (DefaultDirectedEdge<?>) o;
         return Objects.equals(source, edge.source) &&
                 Objects.equals(destination, edge.destination);
     }

@@ -1,11 +1,16 @@
 package com.myworktech;
 
+import com.myworktech.pathFinder.DefaultPath;
+
 import java.util.Set;
 
 public interface Graph<V> {
+    boolean containsVertex(V vertex);
+
+    boolean hasEdge(V vertex1, V vertex2);
+
     void addVertex(V vertex);
 
-    void addEdge(V source, V destination);
+    void addEdge(V vertex1, V vertex2);
 
-    Set<DefaultPath<V>> getPath(V source, V destination);
 }

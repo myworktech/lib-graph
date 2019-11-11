@@ -65,7 +65,7 @@ public class DefaultUndirectedGraphTest {
 
         graph.addEdge(vertex1, vertex2);
 
-        Assert.assertTrue(graph.containsEdge(vertex1, vertex2));
+        Assert.assertTrue(graph.hasEdge(vertex1, vertex2));
     }
 
     @Test
@@ -76,25 +76,25 @@ public class DefaultUndirectedGraphTest {
         graph.addVertex(vertex1);
         graph.addVertex(vertex2);
 
-        Assert.assertFalse(graph.containsEdge(vertex1, vertex2));
+        Assert.assertFalse(graph.hasEdge(vertex1, vertex2));
     }
 
     @Test
     public void checkContainsNotAddedEdge_UndirectedGraph() {
         DefaultUndirectedGraph<Object> graph = new DefaultUndirectedGraph<>();
-        Object vertex1 = new Object();
-        Object vertex2 = new Object();
+        Object vertex1 = "1";
+        Object vertex2 = "2";
         graph.addVertex(vertex1);
         graph.addVertex(vertex2);
 
         graph.addEdge(vertex1, vertex2);
 
-        Assert.assertFalse(graph.containsEdge(vertex2, vertex1));
+        Assert.assertTrue(graph.hasEdge(vertex2, vertex1));
     }
 
 
     @Test(expected = IllegalArgumentException.class)
-    public void cyclesNotAllowed() {
+    public void selfLoopNotAllowed() {
         DefaultUndirectedGraph<Object> graph = new DefaultUndirectedGraph<>();
         Object vertex1 = new Object();
         graph.addVertex(vertex1);

@@ -1,6 +1,7 @@
-package com.myworktech;
+package com.myworktech.pathFinder;
 
-import com.myworktech.edge.DefaultEdge;
+import com.myworktech.DefaultDirectedGraph;
+import com.myworktech.edge.DefaultDirectedEdge;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,7 +36,7 @@ public class DefaultDirectedPathsFinder<V> {
 
                 if (!results.isEmpty()) {
                     for (DefaultPath<V> result : results) {
-                        result.addFirst(new DefaultEdge<>(source, neighbour));
+                        result.addFirst(new DefaultDirectedEdge<>(source, neighbour));
                         if (!allPaths.isEmpty())
                             allPaths.add(result);
                     }

@@ -1,18 +1,18 @@
-package com.myworktech;
+package com.myworktech.pathFinder;
 
-import com.myworktech.edge.DefaultEdge;
+import com.myworktech.edge.Edge;
 
 import java.util.*;
 
 public class DefaultPath<V> {
 
-    private final List<DefaultEdge<V>> edgeList;
+    private final List<Edge<V>> edgeList;
 
     public DefaultPath() {
         this.edgeList = new LinkedList<>();
     }
 
-    public List<DefaultEdge<V>> getEdgeList() {
+    public List<Edge<V>> getEdgeList() {
         return edgeList;
     }
 
@@ -20,11 +20,11 @@ public class DefaultPath<V> {
         return edgeList.size();
     }
 
-    public void add(DefaultEdge<V> edge) {
+    public void add(Edge<V> edge) {
         edgeList.add(edge);
     }
 
-    public void addFirst(DefaultEdge<V> edge) {
+    public void addFirst(Edge<V> edge) {
         edgeList.add(0, edge);
     }
 

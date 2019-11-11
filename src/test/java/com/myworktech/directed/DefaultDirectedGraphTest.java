@@ -65,7 +65,7 @@ public class DefaultDirectedGraphTest {
 
         graph.addEdge(vertex1, vertex2);
 
-        Assert.assertTrue(graph.containsEdge(vertex1, vertex2));
+        Assert.assertTrue(graph.hasEdge(vertex1, vertex2));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class DefaultDirectedGraphTest {
         graph.addVertex(vertex1);
         graph.addVertex(vertex2);
 
-        Assert.assertFalse(graph.containsEdge(vertex1, vertex2));
+        Assert.assertFalse(graph.hasEdge(vertex1, vertex2));
     }
 
     @Test
@@ -89,12 +89,12 @@ public class DefaultDirectedGraphTest {
 
         graph.addEdge(vertex1, vertex2);
 
-        Assert.assertFalse(graph.containsEdge(vertex2, vertex1));
+        Assert.assertFalse(graph.hasEdge(vertex2, vertex1));
     }
 
 
     @Test(expected = IllegalArgumentException.class)
-    public void cyclesNotAllowed() {
+    public void selfLoopNotAllowed() {
         DefaultDirectedGraph<Object> graph = new DefaultDirectedGraph<>();
         Object vertex1 = new Object();
         graph.addVertex(vertex1);
