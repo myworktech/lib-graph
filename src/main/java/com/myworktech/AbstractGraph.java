@@ -6,6 +6,7 @@ import com.myworktech.type.GraphType;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public abstract class AbstractGraph<V> implements Graph<V> {
 
@@ -34,6 +35,11 @@ public abstract class AbstractGraph<V> implements Graph<V> {
         checkCycles(source, destination);
 
         edgeProvider.addEdge(source, destination);
+    }
+
+    @Override
+    public void applyToAllVertexes(Consumer<V> c) {
+        edgeProvider.vertexesSet().forEach(c);
     }
 
     @Override

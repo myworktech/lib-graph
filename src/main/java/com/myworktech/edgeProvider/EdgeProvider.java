@@ -12,6 +12,8 @@ public interface EdgeProvider<V> {
 
     void addVertex(V vertex);
 
+    Set<V> vertexesSet();
+
     boolean hasEdge(V vertex1, V vertex2);
 
     Set<V> getNeighbours(V vertex);

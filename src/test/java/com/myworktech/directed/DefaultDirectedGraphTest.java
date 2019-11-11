@@ -5,6 +5,9 @@ import com.myworktech.DefaultDirectedGraph;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
+
 public class DefaultDirectedGraphTest {
 
     @Test
@@ -101,5 +104,22 @@ public class DefaultDirectedGraphTest {
         graph.addVertex(vertex1);
 
         graph.addEdge(vertex1, vertex1);
+    }
+
+    @Test
+    public void traverse() {
+        DefaultDirectedGraph<Integer> graph = new DefaultDirectedGraph<>();
+        Integer vertex1 = 1;
+        Integer vertex2 = 2;
+        Integer vertex3 = 3;
+
+        graph.addVertex(vertex1);
+        graph.addVertex(vertex2);
+        graph.addVertex(vertex3);
+
+        AtomicInteger intAdder = new AtomicInteger(0);
+        graph.applyToAllVertexes(integer -> intAdder.addAndGet(integer));
+
+        Assert.assertEquals(6, intAdder.get());
     }
 }

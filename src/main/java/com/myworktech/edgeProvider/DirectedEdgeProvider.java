@@ -40,6 +40,11 @@ public class DirectedEdgeProvider<V> implements EdgeProvider<V> {
     }
 
     @Override
+    public Set<V> vertexesSet() {
+        return new HashSet<>(map.keySet());
+    }
+
+    @Override
     public boolean hasEdge(V source, V destination) {
         Set<Edge<V>> edges = map.get(source);
         for (Edge<V> edge : edges) {

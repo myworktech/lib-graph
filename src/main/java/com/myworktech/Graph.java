@@ -1,5 +1,7 @@
 package com.myworktech;
 
+import java.util.function.Consumer;
+
 public interface Graph<V> {
     boolean containsVertex(V vertex);
 
@@ -8,5 +10,7 @@ public interface Graph<V> {
     void addVertex(V vertex);
 
     void addEdge(V vertex1, V vertex2);
+
+    void applyToAllVertexes(Consumer<V> c);
 
 }

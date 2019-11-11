@@ -5,10 +5,7 @@ import com.myworktech.edge.Edge;
 import com.myworktech.edge.Pair;
 import com.myworktech.edge.WeightedUndirectedEdge;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class UndirectedEdgeProvider<V> implements EdgeProvider<V> {
@@ -44,6 +41,11 @@ public class UndirectedEdgeProvider<V> implements EdgeProvider<V> {
     @Override
     public void addVertex(V vertex) {
         map.putIfAbsent(vertex, new HashSet<>());
+    }
+
+    @Override
+    public Set<V> vertexesSet() {
+        return new HashSet<>(map.keySet());
     }
 
     @Override
